@@ -1,6 +1,6 @@
 using System;
 
-namespace KwokKan.NoteDotNet.Web.Models
+namespace NoteDotNet.Web.Models
 {
     public class ErrorViewModel
     {

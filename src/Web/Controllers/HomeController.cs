@@ -1,11 +1,11 @@
 ﻿using System.Diagnostics;
 
-using KwokKan.NoteDotNet.Web.Models;
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace KwokKan.NoteDotNet.Web.Controllers
+using NoteDotNet.Web.Models;
+
+namespace NoteDotNet.Web.Controllers
 {
     public class HomeController : Controller
     {

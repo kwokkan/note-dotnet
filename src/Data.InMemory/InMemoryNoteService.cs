@@ -1,8 +1,7 @@
 ﻿using System.Threading.Tasks;
 
-using KwokKan.NoteDotNet.Models;
-
 using NoteDotNet.Data.Abstractions;
+using NoteDotNet.Models;
 
 namespace NoteDotNet.Data.InMemory
 {

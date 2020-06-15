@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace KwokKan.NoteDotNet.Models
+namespace NoteDotNet.Models
 {
     public class NoteModel
     {

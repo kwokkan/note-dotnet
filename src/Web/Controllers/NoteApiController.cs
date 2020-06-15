@@ -1,12 +1,11 @@
 ﻿using System.Threading.Tasks;
 
-using KwokKan.NoteDotNet.Models;
-
 using Microsoft.AspNetCore.Mvc;
 
 using NoteDotNet.Data.Abstractions;
+using NoteDotNet.Models;
 
-namespace KwokKan.NoteDotNet.Web.Controllers
+namespace NoteDotNet.Web.Controllers
 {
     [ApiController]
     [Route("api/notes")]

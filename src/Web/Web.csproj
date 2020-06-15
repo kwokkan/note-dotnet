@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AssemblyName>KwokKan.NoteDotNet.Web</AssemblyName>
-    <RootNamespace>KwokKan.NoteDotNet.Web</RootNamespace>
+    <AssemblyName>NoteDotNet.Web</AssemblyName>
+    <RootNamespace>NoteDotNet.Web</RootNamespace>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
