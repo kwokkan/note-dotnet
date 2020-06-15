@@ -11,15 +11,15 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-3">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                </ul>
+                <div class="sidebar">
+                    <nav class="nav flex-column">
+                        <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Note DotNet</a>
+                    </nav>
+                </div>
             </div>
 
             <div class="col-9">
-                <main role="main" class="pb-3">
+                <main class="main-content" role="main">
                     @RenderBody()
                 </main>
             </div>
