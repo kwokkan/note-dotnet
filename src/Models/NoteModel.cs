@@ -13,6 +13,6 @@ namespace KwokKan.NoteDotNet.Models
 
         public string Content { get; set; }
 
-        public ICollection<int> TagIds { get; set; }
+        public ICollection<string> Tags { get; set; }
     }
 }
