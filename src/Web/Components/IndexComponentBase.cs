@@ -10,7 +10,7 @@ namespace NoteDotNet.Web
     public class IndexComponentBase : ComponentBase
     {
         [Inject]
-        private INoteService _noteService { get; set; }
+        private INoteService NoteService { get; set; }
 
         protected NoteModel[] Notes { get; private set; }
 
@@ -18,7 +18,7 @@ namespace NoteDotNet.Web
         {
             await base.OnInitializedAsync();
 
-            Notes = await _noteService.SearchAsync();
+            Notes = await NoteService.SearchAsync();
         }
     }
 }
