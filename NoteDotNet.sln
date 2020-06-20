@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "src\Models\Models
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "src\Web\Web.csproj", "{29454ED9-F69E-4B7A-B6D1-D7140E1AA3C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Abstractions", "src\Data.Abstractions\Data.Abstractions.csproj", "{7B62E415-4811-42D7-BC9A-BD15B5887F10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Abstractions", "src\Data.Abstractions\Data.Abstractions.csproj", "{7B62E415-4811-42D7-BC9A-BD15B5887F10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.InMemory", "src\Data.InMemory\Data.InMemory.csproj", "{3070B990-879C-4370-A54B-50CEB7D4E5F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.InMemory", "src\Data.InMemory\Data.InMemory.csproj", "{3070B990-879C-4370-A54B-50CEB7D4E5F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
