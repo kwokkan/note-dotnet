@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 using NoteDotNet.Models;
 
@@ -11,5 +12,7 @@ namespace NoteDotNet.Data.Abstractions
         Task<NoteModel> GetAsync(int id);
 
         Task<NoteModel[]> SearchAsync();
+
+        event Func<NoteModel, Task> OnNoteCreated;
     }
 }

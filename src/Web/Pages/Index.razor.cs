@@ -19,6 +19,14 @@ namespace NoteDotNet.Web
             await base.OnInitializedAsync();
 
             Notes = await NoteService.SearchAsync();
+
+            NoteService.OnNoteCreated += NoteService_OnNoteCreatedAsync;
+        }
+
+        private async Task NoteService_OnNoteCreatedAsync(NoteModel obj)
+        {
+            Notes = await NoteService.SearchAsync();
+            await InvokeAsync(StateHasChanged);
         }
     }
 }
