@@ -18,9 +18,9 @@ namespace NoteDotNet.Data.InMemory
             SeedData();
         }
 
-        public event Func<NoteModel, Task> OnNoteCreated;
+        public event Action<NoteModel> OnNoteCreated;
 
-        async Task<int> INoteService.CreateAsync(NoteModel note)
+        Task<int> INoteService.CreateAsync(NoteModel note)
         {
             var now = DateTime.UtcNow;
             var newNote = new NoteModel
@@ -34,9 +34,9 @@ namespace NoteDotNet.Data.InMemory
 
             _notes.Add(newNote.Id, newNote);
 
-            await OnNoteCreated?.Invoke(newNote);
+            OnNoteCreated?.Invoke(newNote);
 
-            return newNote.Id;
+            return Task.FromResult(newNote.Id);
         }
 
         Task<NoteModel> INoteService.GetAsync(int id)

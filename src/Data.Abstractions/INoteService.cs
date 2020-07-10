@@ -13,6 +13,6 @@ namespace NoteDotNet.Data.Abstractions
 
         Task<NoteModel[]> SearchAsync();
 
-        event Func<NoteModel, Task> OnNoteCreated;
+        event Action<NoteModel> OnNoteCreated;
     }
 }

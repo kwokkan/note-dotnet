@@ -20,10 +20,10 @@ namespace NoteDotNet.Web
 
             Notes = await NoteService.SearchAsync();
 
-            NoteService.OnNoteCreated += NoteService_OnNoteCreatedAsync;
+            NoteService.OnNoteCreated += NoteService_OnNoteCreated;
         }
 
-        private async Task NoteService_OnNoteCreatedAsync(NoteModel obj)
+        private async void NoteService_OnNoteCreated(NoteModel obj)
         {
             Notes = await NoteService.SearchAsync();
             await InvokeAsync(StateHasChanged);
