@@ -49,11 +49,18 @@ namespace NoteDotNet.Data.InMemory
             throw new Exception("Note not found");
         }
 
-        Task<NoteModel[]> INoteService.SearchAsync()
+        Task<CollectionModel<NoteModel>> INoteService.SearchAsync(int offset, int limit)
         {
-            var notes = _notes.Values.ToArray();
+            var notes = _notes.Values.OrderByDescending(x => x.Updated).Skip(offset).Take(limit).ToArray();
 
-            return Task.FromResult(notes);
+            var collection = new CollectionModel<NoteModel>
+            {
+                Offset = offset,
+                Total = _notes.Count,
+                Items = notes,
+            };
+
+            return Task.FromResult(collection);
         }
 
         private static void SeedData()

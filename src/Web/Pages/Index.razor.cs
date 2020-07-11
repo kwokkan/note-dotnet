@@ -9,10 +9,12 @@ namespace NoteDotNet.Web
 {
     public class IndexComponentBase : ComponentBase
     {
+        protected const int Limit = 2;
+
         [Inject]
         private INoteService NoteService { get; set; }
 
-        protected NoteModel[] Notes { get; private set; }
+        protected CollectionModel<NoteModel> Notes { get; private set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -26,6 +28,14 @@ namespace NoteDotNet.Web
         private async void NoteService_OnNoteCreated(NoteModel obj)
         {
             Notes = await NoteService.SearchAsync();
+
+            await InvokeAsync(StateHasChanged);
+        }
+
+        protected async Task ChangePageAsync(int page)
+        {
+            Notes = await NoteService.SearchAsync(offset: (page - 1) * Limit);
+
             await InvokeAsync(StateHasChanged);
         }
     }
