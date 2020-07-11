@@ -2,8 +2,7 @@
 
 using Microsoft.AspNetCore.Components;
 
-using NoteDotNet.Data.Abstractions;
-using NoteDotNet.Models;
+using NoteDotNet.Abstractions;
 
 namespace NoteDotNet.Web
 {

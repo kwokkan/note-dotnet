@@ -1,4 +1,4 @@
-﻿namespace NoteDotNet.Models
+﻿namespace NoteDotNet.Abstractions
 {
     public class CollectionModel<TItem>
     {

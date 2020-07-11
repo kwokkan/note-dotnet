@@ -1,5 +1,5 @@
-﻿using NoteDotNet.Data.Abstractions;
-using NoteDotNet.Data.InMemory;
+﻿using NoteDotNet.Abstractions;
+using NoteDotNet.Abstractions.InMemory;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

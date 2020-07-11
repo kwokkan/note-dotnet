@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using NoteDotNet.Data.Abstractions;
-using NoteDotNet.Models;
-
-namespace NoteDotNet.Data.InMemory
+namespace NoteDotNet.Abstractions.InMemory
 {
     public class InMemoryNoteService : INoteService
     {

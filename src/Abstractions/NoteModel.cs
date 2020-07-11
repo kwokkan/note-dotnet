@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NoteDotNet.Models
+namespace NoteDotNet.Abstractions
 {
     public class NoteModel
     {

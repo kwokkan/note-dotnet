@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Data.InMemory\Data.InMemory.csproj" />
+    <ProjectReference Include="..\Abstractions.InMemory\Abstractions.InMemory.csproj" />
   </ItemGroup>
 
 </Project>

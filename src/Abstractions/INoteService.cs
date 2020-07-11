@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-using NoteDotNet.Models;
-
-namespace NoteDotNet.Data.Abstractions
+namespace NoteDotNet.Abstractions
 {
     public interface INoteService
     {

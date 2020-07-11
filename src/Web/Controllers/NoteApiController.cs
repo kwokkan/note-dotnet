@@ -2,8 +2,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 
-using NoteDotNet.Data.Abstractions;
-using NoteDotNet.Models;
+using NoteDotNet.Abstractions;
 
 namespace NoteDotNet.Web.Controllers
 {
