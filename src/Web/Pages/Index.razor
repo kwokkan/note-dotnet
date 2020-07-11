@@ -9,44 +9,8 @@
 }
 else
 {
-    var currentPage = (int)(Notes.Offset == 0 ? 0 : Math.Ceiling(Notes.Offset / (double)Limit)) + 1;
-    var totalPages = (int)(Notes.Total == 0 ? 1 : Math.Ceiling(Notes.Total / (double)Limit));
-
     <div class="row pt-3">
-        <nav aria-label="Pagination">
-            <ul class="pagination">
-                @if (currentPage > 1)
-                {
-                    <li class="page-item">
-                        <a class="page-link" href="#" @onclick="async () => await ChangePageAsync(currentPage - 1)">Previous</a>
-                    </li>
-                }
-                else
-                {
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Previous</a>
-                    </li>
-                }
-
-                <li class="page-item active">
-                    <a class="page-link" href="#">@currentPage / @totalPages</a>
-                </li>
-
-
-                @if (currentPage < totalPages)
-                {
-                    <li class="page-item">
-                        <a class="page-link" href="#" @onclick="async () => await ChangePageAsync(currentPage + 1)">Next</a>
-                    </li>
-                }
-                else
-                {
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Next</a>
-                    </li>
-                }
-            </ul>
-        </nav>
+        <Pagination Limit="Limit" Offset="Notes.Offset" Total="Notes.Total" OnPageChanged="ChangePageAsync"></Pagination>
     </div>
 
     <div class="row pt-3">

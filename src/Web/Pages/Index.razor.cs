@@ -32,9 +32,9 @@ namespace NoteDotNet.Web
             await InvokeAsync(StateHasChanged);
         }
 
-        protected async Task ChangePageAsync(int page)
+        protected async Task ChangePageAsync(int offset)
         {
-            Notes = await NoteService.SearchAsync(offset: (page - 1) * Limit);
+            Notes = await NoteService.SearchAsync(offset: offset);
 
             await InvokeAsync(StateHasChanged);
         }
