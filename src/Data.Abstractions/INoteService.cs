@@ -11,7 +11,7 @@ namespace NoteDotNet.Data.Abstractions
 
         Task<NoteModel> GetAsync(int id);
 
-        Task<CollectionModel<NoteModel>> SearchAsync(int offset = 0, int limit = 2);
+        Task<CollectionModel<NoteModel>> SearchAsync(string query = null, int offset = 0, int limit = 2);
 
         event Action<NoteModel> OnNoteCreated;
     }

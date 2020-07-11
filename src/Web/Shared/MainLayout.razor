@@ -1,19 +1,21 @@
-﻿@inherits LayoutComponentBase
+﻿@inherits MainLayoutLayoutComponentBase
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-3">
-            <div class="sidebar">
-                <Sidebar />
+<CascadingValue Value="@Query" Name="@nameof(Query)">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3">
+                <div class="sidebar">
+                    <Sidebar OnQueryChanged="@OnSidebarQueryChanged" />
+                </div>
+            </div>
+
+            <div class="col-9">
+                <main class="main-content" role="main">
+                    @Body
+                </main>
             </div>
         </div>
-
-        <div class="col-9">
-            <main class="main-content" role="main">
-                @Body
-            </main>
-        </div>
     </div>
-</div>
+</CascadingValue>
 
 <NewNoteModal />

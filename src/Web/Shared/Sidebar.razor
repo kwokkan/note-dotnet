@@ -1,9 +1,21 @@
-﻿
+﻿@inherits SidebarComponentBase
+
 <nav class="nav flex-column">
     <NavLink class="nav-link text-dark" href="" Match="NavLinkMatch.All">
         Note DotNet
     </NavLink>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new-note-modal">
-        +
-    </button>
+
+    <EditForm class="pl-3 pr-3" Model="this" OnSubmit="OnSubmit">
+        <div class="input-group mb-3">
+            <InputText type="search" class="form-control" placeholder="Search..." @bind-Value="Query"></InputText>
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Search</button>
+
+                <button type="button" class="btn btn-success" title="New Note" data-toggle="modal" data-target="#new-note-modal">
+                    +
+                </button>
+            </div>
+        </div>
+    </EditForm>
+
 </nav>

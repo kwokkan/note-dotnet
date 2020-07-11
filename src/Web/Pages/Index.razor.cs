@@ -14,27 +14,39 @@ namespace NoteDotNet.Web
         [Inject]
         private INoteService NoteService { get; set; }
 
+        [CascadingParameter(Name = "Query")]
+        protected string Query { get; set; }
+
         protected CollectionModel<NoteModel> Notes { get; private set; }
 
         protected override async Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();
 
-            Notes = await NoteService.SearchAsync();
+            Notes = await NoteService.SearchAsync(query: Query);
 
             NoteService.OnNoteCreated += NoteService_OnNoteCreated;
         }
 
+        protected override async Task OnParametersSetAsync()
+        {
+            await base.OnParametersSetAsync();
+
+            Notes = await NoteService.SearchAsync(query: Query);
+
+            await InvokeAsync(StateHasChanged);
+        }
+
         private async void NoteService_OnNoteCreated(NoteModel obj)
         {
-            Notes = await NoteService.SearchAsync();
+            Notes = await NoteService.SearchAsync(query: Query);
 
             await InvokeAsync(StateHasChanged);
         }
 
         protected async Task ChangePageAsync(int offset)
         {
-            Notes = await NoteService.SearchAsync(offset: offset);
+            Notes = await NoteService.SearchAsync(query: Query, offset: offset);
 
             await InvokeAsync(StateHasChanged);
         }

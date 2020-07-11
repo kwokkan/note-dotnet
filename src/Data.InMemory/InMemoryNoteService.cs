@@ -49,14 +49,25 @@ namespace NoteDotNet.Data.InMemory
             throw new Exception("Note not found");
         }
 
-        Task<CollectionModel<NoteModel>> INoteService.SearchAsync(int offset, int limit)
+        Task<CollectionModel<NoteModel>> INoteService.SearchAsync(string query, int offset, int limit)
         {
-            var notes = _notes.Values.OrderByDescending(x => x.Updated).Skip(offset).Take(limit).ToArray();
+            IEnumerable<NoteModel> q = _notes.Values;
+
+            if (!string.IsNullOrEmpty(query))
+            {
+                q = q.Where(x => x.Content.Contains(query, StringComparison.CurrentCultureIgnoreCase));
+            }
+
+            var total = q.Count();
+
+            q = q.OrderByDescending(x => x.Updated).Skip(offset).Take(limit);
+
+            var notes = q.ToArray();
 
             var collection = new CollectionModel<NoteModel>
             {
                 Offset = offset,
-                Total = _notes.Count,
+                Total = total,
                 Items = notes,
             };
 
