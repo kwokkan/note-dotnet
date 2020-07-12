@@ -46,7 +46,12 @@ namespace NoteDotNet.Abstractions.InMemory
             throw new Exception("Note not found");
         }
 
-        Task<CollectionModel<NoteModel>> INoteService.SearchAsync(string query, int offset, int limit)
+        Task<CollectionModel<NoteModel>> INoteService.SearchAsync(
+            string query,
+            int offset,
+            int limit,
+            SortProperty sortProperty,
+            SortDirection sortDirection)
         {
             IEnumerable<NoteModel> q = _notes.Values;
 
@@ -57,7 +62,18 @@ namespace NoteDotNet.Abstractions.InMemory
 
             var total = q.Count();
 
-            q = q.OrderByDescending(x => x.Updated).Skip(offset).Take(limit);
+            switch (sortProperty)
+            {
+                case SortProperty.Created:
+                    q = sortDirection == SortDirection.Descending ? q.OrderByDescending(x => x.Created) : q.OrderBy(x => x.Created);
+                    break;
+                case SortProperty.Updated:
+                default:
+                    q = sortDirection == SortDirection.Descending ? q.OrderByDescending(x => x.Updated) : q.OrderBy(x => x.Updated);
+                    break;
+            }
+
+            q = q.Skip(offset).Take(limit);
 
             var notes = q.ToArray();
 
@@ -79,16 +95,16 @@ namespace NoteDotNet.Abstractions.InMemory
             _notes.Add(1, new NoteModel
             {
                 Id = 1,
-                Created = now,
-                Updated = now,
+                Created = now.AddDays(-7),
+                Updated = now.AddDays(-7),
                 Content = "# Hello World"
             });
 
             _notes.Add(2, new NoteModel
             {
                 Id = 2,
-                Created = now,
-                Updated = now,
+                Created = now.AddDays(-3),
+                Updated = now.AddDays(-3),
                 Content = "# With tags",
                 Tags = new string[]
                 {

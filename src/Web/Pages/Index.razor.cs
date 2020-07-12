@@ -13,16 +13,24 @@ namespace NoteDotNet.Web
         [Inject]
         private INoteService NoteService { get; set; }
 
-        [CascadingParameter(Name = "Query")]
+        [CascadingParameter(Name = nameof(Query))]
         protected string Query { get; set; }
 
+        [CascadingParameter(Name = nameof(Property))]
+        protected SortProperty Property { get; set; }
+
+        [CascadingParameter(Name = nameof(Direction))]
+        protected SortDirection Direction { get; set; }
+
         protected CollectionModel<NoteModel> Notes { get; private set; }
+
+        private int _offset = 0;
 
         protected override async Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();
 
-            Notes = await NoteService.SearchAsync(query: Query);
+            await SearchAsync();
 
             NoteService.OnNoteCreated += NoteService_OnNoteCreated;
         }
@@ -31,21 +39,28 @@ namespace NoteDotNet.Web
         {
             await base.OnParametersSetAsync();
 
-            Notes = await NoteService.SearchAsync(query: Query);
-
-            await InvokeAsync(StateHasChanged);
+            await SearchAsync();
         }
 
         private async void NoteService_OnNoteCreated(NoteModel obj)
         {
-            Notes = await NoteService.SearchAsync(query: Query);
-
-            await InvokeAsync(StateHasChanged);
+            await SearchAsync();
         }
 
         protected async Task ChangePageAsync(int offset)
         {
-            Notes = await NoteService.SearchAsync(query: Query, offset: offset);
+            _offset = offset;
+
+            await SearchAsync();
+        }
+
+        private async Task SearchAsync()
+        {
+            Notes = await NoteService.SearchAsync(
+                query: Query,
+                offset: _offset,
+                sortProperty: Property,
+                sortDirection: Direction);
 
             await InvokeAsync(StateHasChanged);
         }

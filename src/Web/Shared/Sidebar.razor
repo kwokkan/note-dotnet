@@ -16,6 +16,17 @@
                 </button>
             </div>
         </div>
-    </EditForm>
 
+        <div class="input-group mb-3">
+            <InputSelect class="form-control" @bind-Value="@Property">
+                <option value="@SortProperty.Created">@nameof(SortProperty.Created)</option>
+                <option value="@SortProperty.Updated">@nameof(SortProperty.Updated)</option>
+            </InputSelect>
+
+            <InputSelect class="form-control" @bind-Value="@Direction">
+                <option value="@SortDirection.Ascending">@nameof(SortDirection.Ascending)</option>
+                <option value="@SortDirection.Descending">@nameof(SortDirection.Descending)</option>
+            </InputSelect>
+        </div>
+    </EditForm>
 </nav>
