@@ -1,4 +1,6 @@
-﻿using NoteDotNet.Abstractions;
+﻿using System;
+
+using NoteDotNet.Abstractions;
 
 namespace NoteDotNet.Web.Models
 {
@@ -11,5 +13,7 @@ namespace NoteDotNet.Web.Models
         public SortProperty Property { get; set; } = SortProperty.Updated;
 
         public SortDirection Direction { get; set; } = SortDirection.Descending;
+
+        public DateTime LastActivity { get; set; }
     }
 }

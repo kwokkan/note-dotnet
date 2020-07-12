@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Components;
 
@@ -19,6 +20,8 @@ namespace NoteDotNet.Web
 
         private int _offset = 0;
 
+        private DateTime _lastActivity;
+
         protected override async Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();
@@ -31,6 +34,12 @@ namespace NoteDotNet.Web
         protected override async Task OnParametersSetAsync()
         {
             await base.OnParametersSetAsync();
+
+            if (AppState.LastActivity > _lastActivity)
+            {
+                _lastActivity = AppState.LastActivity;
+                _offset = 0;
+            }
 
             await SearchAsync();
         }

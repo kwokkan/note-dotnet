@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System;
+
+using Microsoft.AspNetCore.Components;
 
 using NoteDotNet.Web.Models;
 
@@ -13,6 +15,7 @@ namespace NoteDotNet.Web.Shared
             AppState.Query = eventArgs.Query;
             AppState.Property = eventArgs.SortProperty;
             AppState.Direction = eventArgs.SortDirection;
+            AppState.LastActivity = DateTime.UtcNow;
         }
     }
 }
