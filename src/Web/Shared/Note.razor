@@ -1,0 +1,19 @@
+﻿@inherits NoteComponentBase
+
+<div class="card">
+    <div class="card-body">
+        <p class="card-text">
+            @Note.Content
+        </p>
+    </div>
+
+    @if (Note.Tags != null)
+    {
+        <div class="card-footer">
+            @foreach (var tag in Note.Tags)
+            {
+                <span class="badge badge-pill badge-primary">@tag</span>
+            }
+        </div>
+    }
+</div>
