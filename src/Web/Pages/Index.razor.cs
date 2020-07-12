@@ -8,13 +8,14 @@ namespace NoteDotNet.Web
 {
     public class IndexComponentBase : ComponentBase
     {
-        protected const int Limit = 2;
-
         [Inject]
         private INoteService NoteService { get; set; }
 
         [CascadingParameter(Name = nameof(Query))]
         protected string Query { get; set; }
+
+        [CascadingParameter(Name = nameof(Limit))]
+        protected int Limit { get; set; }
 
         [CascadingParameter(Name = nameof(Property))]
         protected SortProperty Property { get; set; }
@@ -59,6 +60,7 @@ namespace NoteDotNet.Web
             Notes = await NoteService.SearchAsync(
                 query: Query,
                 offset: _offset,
+                limit: Limit,
                 sortProperty: Property,
                 sortDirection: Direction);
 

@@ -9,9 +9,9 @@ namespace NoteDotNet.Web.Shared
     {
         protected string Query { get; set; }
 
-        public SortProperty Property { get; set; } = SortProperty.Updated;
+        protected SortProperty Property { get; set; } = SortProperty.Updated;
 
-        public SortDirection Direction { get; set; } = SortDirection.Descending;
+        protected SortDirection Direction { get; set; } = SortDirection.Descending;
 
         [Parameter]
         public EventCallback<QueryChangedEventArgs> OnQueryChanged { get; set; }

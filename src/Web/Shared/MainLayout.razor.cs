@@ -9,9 +9,11 @@ namespace NoteDotNet.Web.Shared
     {
         protected string Query { get; set; }
 
-        public SortProperty Property { get; set; } = SortProperty.Updated;
+        protected int Limit { get; set; } = 1;
 
-        public SortDirection Direction { get; set; } = SortDirection.Descending;
+        protected SortProperty Property { get; set; } = SortProperty.Updated;
+
+        protected SortDirection Direction { get; set; } = SortDirection.Descending;
 
         protected void OnSidebarQueryChanged(QueryChangedEventArgs eventArgs)
         {
