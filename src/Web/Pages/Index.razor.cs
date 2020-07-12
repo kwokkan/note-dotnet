@@ -3,6 +3,7 @@
 using Microsoft.AspNetCore.Components;
 
 using NoteDotNet.Abstractions;
+using NoteDotNet.Web.Models;
 
 namespace NoteDotNet.Web
 {
@@ -11,17 +12,8 @@ namespace NoteDotNet.Web
         [Inject]
         private INoteService NoteService { get; set; }
 
-        [CascadingParameter(Name = nameof(Query))]
-        protected string Query { get; set; }
-
-        [CascadingParameter(Name = nameof(Limit))]
-        protected int Limit { get; set; }
-
-        [CascadingParameter(Name = nameof(Property))]
-        protected SortProperty Property { get; set; }
-
-        [CascadingParameter(Name = nameof(Direction))]
-        protected SortDirection Direction { get; set; }
+        [CascadingParameter(Name = nameof(AppState))]
+        protected AppState AppState { get; set; }
 
         protected CollectionModel<NoteModel> Notes { get; private set; }
 
@@ -58,11 +50,11 @@ namespace NoteDotNet.Web
         private async Task SearchAsync()
         {
             Notes = await NoteService.SearchAsync(
-                query: Query,
+                query: AppState.Query,
                 offset: _offset,
-                limit: Limit,
-                sortProperty: Property,
-                sortDirection: Direction);
+                limit: AppState.Limit,
+                sortProperty: AppState.Property,
+                sortDirection: AppState.Direction);
 
             await InvokeAsync(StateHasChanged);
         }

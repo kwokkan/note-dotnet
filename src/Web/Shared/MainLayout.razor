@@ -1,27 +1,21 @@
 ﻿@inherits MainLayoutLayoutComponentBase
 
-<CascadingValue Value="@Query" Name="@nameof(Query)">
-    <CascadingValue Value="@Limit" Name="@nameof(Limit)">
-        <CascadingValue Value="@Property" Name="@nameof(Property)">
-            <CascadingValue Value="@Direction" Name="@nameof(Direction)">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-3">
-                            <div class="sidebar">
-                                <Sidebar OnQueryChanged="@OnSidebarQueryChanged" />
-                            </div>
-                        </div>
-
-                        <div class="col-9">
-                            <main class="main-content" role="main">
-                                @Body
-                            </main>
-                        </div>
-                    </div>
+<CascadingValue Value="@AppState" Name="@nameof(AppState)">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3">
+                <div class="sidebar">
+                    <Sidebar OnQueryChanged="@OnSidebarQueryChanged" />
                 </div>
-            </CascadingValue>
-        </CascadingValue>
-    </CascadingValue>
+            </div>
+
+            <div class="col-9">
+                <main class="main-content" role="main">
+                    @Body
+                </main>
+            </div>
+        </div>
+    </div>
 </CascadingValue>
 
 <NewNoteModal />
