@@ -19,14 +19,27 @@
 
         <div class="input-group mb-3">
             <InputSelect class="form-control" @bind-Value="@Property">
-                <option value="@SortProperty.Created">@nameof(SortProperty.Created)</option>
-                <option value="@SortProperty.Updated">@nameof(SortProperty.Updated)</option>
+                <optgroup label="Sort by">
+                    <option value="@SortProperty.Created">@nameof(SortProperty.Created)</option>
+                    <option value="@SortProperty.Updated">@nameof(SortProperty.Updated)</option>
+                </optgroup>
             </InputSelect>
 
             <InputSelect class="form-control" @bind-Value="@Direction">
-                <option value="@SortDirection.Ascending">@nameof(SortDirection.Ascending)</option>
-                <option value="@SortDirection.Descending">@nameof(SortDirection.Descending)</option>
+                <optgroup label="Direction">
+                    <option value="@SortDirection.Ascending">@nameof(SortDirection.Ascending)</option>
+                    <option value="@SortDirection.Descending">@nameof(SortDirection.Descending)</option>
+                </optgroup>
             </InputSelect>
+
+            <GenericInputSelect class="form-control" @bind-Value="@Limit">
+                <optgroup label="Limit">
+                    @for (int i = 1; i <= 10; i++)
+                    {
+                        <option value="@i" selected="@(DefaultLimit == i)">@i</option>
+                    }
+                </optgroup>
+            </GenericInputSelect>
         </div>
     </EditForm>
 </nav>

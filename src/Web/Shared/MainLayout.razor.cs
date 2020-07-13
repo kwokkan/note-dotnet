@@ -13,6 +13,7 @@ namespace NoteDotNet.Web.Shared
         protected void OnSidebarQueryChanged(QueryChangedEventArgs eventArgs)
         {
             AppState.Query = eventArgs.Query;
+            AppState.Limit = eventArgs.Limit;
             AppState.Property = eventArgs.SortProperty;
             AppState.Direction = eventArgs.SortDirection;
             AppState.LastActivity = DateTime.UtcNow;

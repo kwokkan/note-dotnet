@@ -9,9 +9,14 @@ namespace NoteDotNet.Web.Shared
     {
         protected string Query { get; set; }
 
+        protected int Limit { get; set; }
+
         protected SortProperty Property { get; set; } = SortProperty.Updated;
 
         protected SortDirection Direction { get; set; } = SortDirection.Descending;
+
+        [Parameter]
+        public int DefaultLimit { get; set; }
 
         [Parameter]
         public EventCallback<QueryChangedEventArgs> OnQueryChanged { get; set; }
@@ -21,6 +26,7 @@ namespace NoteDotNet.Web.Shared
             var args = new QueryChangedEventArgs
             {
                 Query = Query,
+                Limit = Limit,
                 SortDirection = Direction,
                 SortProperty = Property
             };
