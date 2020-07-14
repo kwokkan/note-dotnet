@@ -3,6 +3,6 @@
 
 // Write your JavaScript code.
 
-function modalClose() {
-    $("#modal").modal("hide");
+function modalClose(id) {
+    $("#" + id).modal("hide");
 }

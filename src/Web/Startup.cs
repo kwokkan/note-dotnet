@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using NoteDotNet.Web.Helpers;
+
 namespace NoteDotNet.Web
 {
     public class Startup
@@ -23,6 +25,10 @@ namespace NoteDotNet.Web
             services.AddServerSideBlazor();
 
             services.AddInMemoryData();
+
+            services
+                .AddScoped<IJsHelper, JsHelper>()
+            ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

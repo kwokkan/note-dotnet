@@ -1,16 +1,17 @@
 ﻿using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
-
 using NoteDotNet.Abstractions;
+using NoteDotNet.Web.Helpers;
 
 namespace NoteDotNet.Web
 {
     public class NewNoteModalComponentBase : ComponentBase
     {
+        public const string Id = "new-note-modal";
+
         [Inject]
-        private IJSRuntime JSRuntime { get; set; }
+        private IJsHelper JsHelper { get; set; }
 
         [Inject]
         private INoteService NoteService { get; set; }
@@ -31,7 +32,7 @@ namespace NoteDotNet.Web
 
             await OnNoteCreated.InvokeAsync(newId);
 
-            await JSRuntime.InvokeVoidAsync("modalClose");
+            await JsHelper.CloseModal(Id);
         }
     }
 }
