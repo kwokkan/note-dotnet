@@ -4,12 +4,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 
 using NoteDotNet.Abstractions;
+using NoteDotNet.Web.Helpers;
 using NoteDotNet.Web.Models;
+using NoteDotNet.Web.Shared;
 
 namespace NoteDotNet.Web
 {
     public class IndexComponentBase : ComponentBase
     {
+        [Inject]
+        public IJsHelper JsHelper { get; set; }
+
         [Inject]
         private INoteService NoteService { get; set; }
 
@@ -54,6 +59,15 @@ namespace NoteDotNet.Web
             _offset = offset;
 
             await SearchAsync();
+        }
+
+        protected void NoteEditClicked(NoteModel note)
+        {
+        }
+
+        protected async Task NoteDeleteClickedAsync(NoteModel note)
+        {
+            await JsHelper.ShowModal(DeleteNoteModalComponentBase.Id);
         }
 
         private async Task SearchAsync()

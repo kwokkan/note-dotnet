@@ -17,7 +17,7 @@ else
         <div class="card-columns">
             @foreach (var note in Notes.Items)
             {
-                <Note @key="@note.Id" Note="@note"></Note>
+                <Note @key="@note.Id" Note="@note" OnEditClicked="NoteEditClicked" OnDeleteClicked="NoteDeleteClickedAsync"></Note>
             }
         </div>
     </div>

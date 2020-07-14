@@ -17,5 +17,10 @@ namespace NoteDotNet.Web.Helpers
         {
             return _jSRuntime.InvokeVoidAsync("modalClose", id);
         }
+
+        ValueTask IJsHelper.ShowModal(string id)
+        {
+            return _jSRuntime.InvokeVoidAsync("modalShow", id);
+        }
     }
 }

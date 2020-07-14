@@ -1,6 +1,14 @@
 ﻿@inherits NoteComponentBase
 
 <div class="card">
+    <div class="card-header">
+        <a href="#" title="Edit" @onclick="EditClicked">✏️</a>
+        <a href="#" title="Delete" @onclick="DeleteClicked">🗑️</a>
+        <span title="Updated @Note.Updated">🕓</span>
+
+        <span class="text-muted float-right">#@Note.Id</span>
+    </div>
+
     <div class="card-body">
         <p class="card-text">
             @Note.Content

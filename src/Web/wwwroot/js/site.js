@@ -6,3 +6,7 @@
 function modalClose(id) {
     $("#" + id).modal("hide");
 }
+
+function modalShow(id) {
+    $("#" + id).modal("show");
+}
