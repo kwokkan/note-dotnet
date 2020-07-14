@@ -15,7 +15,6 @@ namespace NoteDotNet.Web
         [Inject]
         private INoteService NoteService { get; set; }
 
-        protected string Id { get; } = "new-note-modal";
         protected NoteModel Model = new NoteModel();
 
         [Parameter]
@@ -32,7 +31,7 @@ namespace NoteDotNet.Web
 
             await OnNoteCreated.InvokeAsync(newId);
 
-            await JSRuntime.InvokeVoidAsync("modalClose", Id);
+            await JSRuntime.InvokeVoidAsync("modalClose");
         }
     }
 }
