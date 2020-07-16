@@ -13,6 +13,9 @@ namespace NoteDotNet.Web
     public class IndexComponentBase : ComponentBase
     {
         [Inject]
+        private NavigationManager NavigationManager { get; set; }
+
+        [Inject]
         public IJsHelper JsHelper { get; set; }
 
         [Inject]
@@ -63,6 +66,7 @@ namespace NoteDotNet.Web
 
         protected void NoteEditClicked(NoteModel note)
         {
+            NavigationManager.NavigateTo($"/{note.Id}");
         }
 
         protected async Task NoteDeleteClickedAsync(NoteModel note)

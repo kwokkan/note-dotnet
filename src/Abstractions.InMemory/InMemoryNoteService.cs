@@ -40,7 +40,8 @@ namespace NoteDotNet.Abstractions.InMemory
         {
             if (_notes.TryGetValue(id, out var note))
             {
-                return Task.FromResult(note);
+                var cloned = note.DeepClone();
+                return Task.FromResult(cloned);
             }
 
             throw new Exception("Note not found");
@@ -87,6 +88,22 @@ namespace NoteDotNet.Abstractions.InMemory
             return Task.FromResult(collection);
         }
 
+        Task INoteService.UpdateAsync(int id, NoteModel note)
+        {
+            if (_notes.TryGetValue(id, out var existing))
+            {
+                var cloned = note.DeepClone();
+
+                existing.Updated = DateTime.UtcNow;
+                existing.Content = cloned.Content;
+                existing.Tags = cloned.Tags;
+
+                return Task.CompletedTask;
+            }
+
+            throw new Exception("Note not found");
+        }
+
         private static void SeedData()
         {
             _notes = new Dictionary<int, NoteModel>();
@@ -106,7 +123,7 @@ namespace NoteDotNet.Abstractions.InMemory
                 Created = now.AddDays(-3),
                 Updated = now.AddDays(-3),
                 Content = "# With tags",
-                Tags = new string[]
+                Tags = new HashSet<string>
                 {
                     "first tag",
                     "test"
@@ -119,7 +136,7 @@ namespace NoteDotNet.Abstractions.InMemory
                 Created = now,
                 Updated = now,
                 Content = "# More tags",
-                Tags = new string[]
+                Tags = new HashSet<string>
                 {
                     "test",
                     "more tag"

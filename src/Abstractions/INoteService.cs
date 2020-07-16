@@ -16,6 +16,8 @@ namespace NoteDotNet.Abstractions
             SortProperty sortProperty = SortProperty.Updated,
             SortDirection sortDirection = SortDirection.Descending);
 
+        Task UpdateAsync(int id, NoteModel note);
+
         event Action<NoteModel> OnNoteCreated;
     }
 }

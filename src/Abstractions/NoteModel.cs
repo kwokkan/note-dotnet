@@ -13,6 +13,6 @@ namespace NoteDotNet.Abstractions
 
         public string Content { get; set; }
 
-        public ICollection<string> Tags { get; set; }
+        public ISet<string> Tags { get; set; } = new HashSet<string>();
     }
 }

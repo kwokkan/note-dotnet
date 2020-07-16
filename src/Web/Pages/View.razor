@@ -1,0 +1,63 @@
+﻿@page "/{Id:int}"
+@inherits ViewComponentBase
+
+@if (Note == null)
+{
+    <p>No note selected</p>
+}
+else
+{
+    <div class="row pt-3 mb-3">
+        <a href="/" class="btn btn-link">
+            Cancel
+        </a>
+        <div class="btn-group">
+            <button type="button" class="btn btn-success" @onclick="OnSaveNoteClickedAsync">Save</button>
+        </div>
+    </div>
+
+    <div class="row-fluid pt-3">
+        <EditForm Model="Note">
+            <div class="card-group">
+                <div class="card">
+                    <div class="card-header">
+                        <span title="Updated @Note.Updated">🕓</span>
+
+                        <span class="text-muted float-right">#@Note.Id</span>
+                    </div>
+
+                    <div class="card-body">
+                        <InputTextArea class="form-control" @bind-Value="@Note.Content">
+                        </InputTextArea>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        Tags
+                    </div>
+
+                    <div class="card-body">
+                        <p class="card-text lead">
+                            @if (!Note.Tags.IsNullOrEmpty())
+                            {
+                                @foreach (var tag in Note.Tags)
+                                {
+                                    <span class="badge badge-pill badge-primary">
+                                        @tag
+
+                                        <span class="badge badge-pill badge-danger ml-2" title="Delete tag" @onclick="() => OnTagDeleteClicked(tag)">&times;</span>
+                                    </span>
+                                }
+                            }
+                        </p>
+
+                        <p class="card-text">
+                            <InputText class="form-control" placeholder="Enter new tag..." @bind-Value="@CurrentTagText" @onkeyup="OnCurrentTagTextKeyUp" />
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+}

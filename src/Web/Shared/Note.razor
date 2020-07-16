@@ -15,7 +15,7 @@
         </p>
     </div>
 
-    @if (Note.Tags != null)
+    @if (!Note.Tags.IsNullOrEmpty())
     {
         <div class="card-footer">
             @foreach (var tag in Note.Tags)
