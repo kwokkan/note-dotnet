@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+
 using NoteDotNet.Abstractions;
 
 namespace NoteDotNet.Web.Pages
@@ -11,6 +11,9 @@ namespace NoteDotNet.Web.Pages
     {
         [Inject]
         private INoteService NoteService { get; set; }
+
+        [Inject]
+        private NavigationManager NavigationManager { get; set; }
 
         [Parameter]
         public int Id { get; set; }
@@ -29,6 +32,8 @@ namespace NoteDotNet.Web.Pages
         protected async Task OnSaveNoteClickedAsync()
         {
             await NoteService.UpdateAsync(Id, Note);
+
+            NavigationManager.NavigateTo("/");
         }
 
         protected void OnCurrentTagTextKeyUp(KeyboardEventArgs eventArgs)
