@@ -7,6 +7,8 @@ namespace NoteDotNet.Abstractions
     {
         Task<int> CreateAsync(NoteModel note);
 
+        Task DeleteAsync(int id);
+
         Task<NoteModel> GetAsync(int id);
 
         Task<CollectionModel<NoteModel>> SearchAsync(

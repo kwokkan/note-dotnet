@@ -2,10 +2,21 @@
 
 <Modal Id="@Id" Title="Delete note">
     <div class="modal-body">
-        <p>Delete note?</p>
+        <p>
+            Delete
+            @if (Note != null)
+            {
+                <strong>@Note.Content</strong>
+            }
+            else
+            {
+                <>note</>
+            }
+            ?
+        </p>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Keep</button>
-        <button type="submit" class="btn btn-danger">Delete</button>
+        <button type="submit" class="btn btn-danger" @onclick="DeleteClickedAsync">Delete</button>
     </div>
 </Modal>

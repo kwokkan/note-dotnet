@@ -71,6 +71,8 @@ namespace NoteDotNet.Web
 
         protected async Task NoteDeleteClickedAsync(NoteModel note)
         {
+            AppState.SetCurrentNote(note);
+
             await JsHelper.ShowModal(DeleteNoteModalComponentBase.Id);
         }
 

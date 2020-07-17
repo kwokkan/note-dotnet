@@ -36,6 +36,18 @@ namespace NoteDotNet.Abstractions.InMemory
             return Task.FromResult(newNote.Id);
         }
 
+        Task INoteService.DeleteAsync(int id)
+        {
+            if (_notes.ContainsKey(id))
+            {
+                _notes.Remove(id);
+
+                return Task.CompletedTask;
+            }
+
+            throw new Exception("Note not found");
+        }
+
         Task<NoteModel> INoteService.GetAsync(int id)
         {
             if (_notes.TryGetValue(id, out var note))
