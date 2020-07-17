@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Components;
+
 using NoteDotNet.Abstractions;
-using NoteDotNet.Web.Helpers;
 
 namespace NoteDotNet.Web
 {
@@ -10,16 +10,10 @@ namespace NoteDotNet.Web
     {
         public const string Id = "new-note-modal";
 
-        [Inject]
-        private IJsHelper JsHelper { get; set; }
-
-        [Inject]
-        private INoteService NoteService { get; set; }
-
         protected NoteModel Model = new NoteModel();
 
         [Parameter]
-        public EventCallback<int> OnNoteCreated { get; set; }
+        public EventCallback<NoteModel> OnNoteCreated { get; set; }
 
         protected async Task OnSubmitAsync()
         {
@@ -28,11 +22,7 @@ namespace NoteDotNet.Web
                 Content = Model.Content
             };
 
-            var newId = await NoteService.CreateAsync(newNote);
-
-            await OnNoteCreated.InvokeAsync(newId);
-
-            await JsHelper.CloseModal(Id);
+            await OnNoteCreated.InvokeAsync(newNote);
         }
     }
 }

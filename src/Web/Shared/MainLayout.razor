@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <NewNoteModal />
+    <NewNoteModal OnNoteCreated="@OnNewNoteModalNoteCreatedAsync" />
 
     <DeleteNoteModal Note="@AppState.CurrentNote" OnDeletedClicked="@OnDeleteNoteModalDeleteClickedAsync" />
 </CascadingValue>

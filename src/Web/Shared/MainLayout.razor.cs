@@ -28,6 +28,13 @@ namespace NoteDotNet.Web.Shared
             AppState.LastActivity = DateTime.UtcNow;
         }
 
+        protected async Task OnNewNoteModalNoteCreatedAsync(NoteModel note)
+        {
+            await NoteService.CreateAsync(note);
+
+            await JsHelper.CloseModal(NewNoteModalComponentBase.Id);
+        }
+
         protected async Task OnDeleteNoteModalDeleteClickedAsync(NoteModel note)
         {
             await NoteService.DeleteAsync(note.Id);
