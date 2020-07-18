@@ -21,6 +21,13 @@ namespace NoteDotNet.Web.Shared
         [Parameter]
         public EventCallback<QueryChangedEventArgs> OnQueryChanged { get; set; }
 
+        protected override void OnInitialized()
+        {
+            Limit = DefaultLimit;
+
+            base.OnInitialized();
+        }
+
         protected void OnSubmit()
         {
             var args = new QueryChangedEventArgs
