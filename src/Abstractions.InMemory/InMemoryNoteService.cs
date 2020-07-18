@@ -145,13 +145,39 @@ namespace NoteDotNet.Abstractions.InMemory
             _notes.Add(3, new NoteModel
             {
                 Id = 3,
-                Created = now,
-                Updated = now,
+                Created = now.AddDays(-2),
+                Updated = now.AddDays(-2),
                 Content = "# More tags",
                 Tags = new HashSet<string>
                 {
                     "test",
                     "more tag"
+                }
+            });
+
+            _notes.Add(4, new NoteModel
+            {
+                Id = 4,
+                Created = now,
+                Updated = now,
+                Content =
+@"# header 1
+---
+## header 2
+### header 3
+#### header 4
+##### header 5
+###### header 6
+####### no header
+---
+Markdown is displayed.
+
+Only headers supported.
+",
+                Tags = new HashSet<string>
+                {
+                    "markdown",
+                    "md"
                 }
             });
 
