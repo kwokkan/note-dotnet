@@ -1,4 +1,5 @@
 ﻿@inherits NoteComponentBase
+@using NoteDotNet.Web.Helpers
 
 <div class="card">
     <div class="card-header">
@@ -11,7 +12,7 @@
 
     <div class="card-body">
         <p class="card-text">
-            @HtmlContent
+            @MarkdownHelper.ToHtml(Note.Content)
         </p>
     </div>
 

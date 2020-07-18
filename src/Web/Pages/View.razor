@@ -1,5 +1,6 @@
 ﻿@page "/{Id:int}"
 @inherits ViewComponentBase
+@using NoteDotNet.Web.Helpers
 
 @if (Note == null)
 {
@@ -29,6 +30,18 @@ else
                     <div class="card-body">
                         <InputTextArea class="form-control" @bind-Value="@Note.Content">
                         </InputTextArea>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        Preview
+                    </div>
+
+                    <div class="card-body">
+                        <p class="card-text">
+                            @MarkdownHelper.ToHtml(Note.Content)
+                        </p>
                     </div>
                 </div>
 
