@@ -40,15 +40,20 @@ namespace NoteDotNet.Web.Pages
         {
             if (eventArgs.Key == "Enter")
             {
-                Note.Tags.Add(CurrentTagText);
-
-                CurrentTagText = null;
+                AddTag();
             }
         }
 
         protected void OnTagDeleteClicked(string tag)
         {
             Note.Tags.Remove(tag);
+        }
+
+        protected void AddTag()
+        {
+            Note.Tags.Add(CurrentTagText);
+
+            CurrentTagText = null;
         }
     }
 }

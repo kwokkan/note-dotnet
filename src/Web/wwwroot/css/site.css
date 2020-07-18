@@ -36,3 +36,7 @@ for details on configuring this project to bundle and minify static web assets. 
     line-height: 1.25;
     display: inline-block;
 }
+
+.edit-note-content {
+    height: calc(100vh - 200px) !important;
+}
