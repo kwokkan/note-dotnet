@@ -10,12 +10,12 @@ namespace NoteDotNet.Web.Shared
     {
         public const string Id = "new-note-modal";
 
-        protected NoteModel Model = new NoteModel();
+        private NoteModel Model = new NoteModel();
 
         [Parameter]
         public EventCallback<NoteModel> OnNoteCreated { get; set; }
 
-        protected async Task OnSubmitAsync()
+        private async Task OnSubmitAsync()
         {
             var newNote = new NoteModel
             {

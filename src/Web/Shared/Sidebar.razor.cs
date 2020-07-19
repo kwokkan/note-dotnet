@@ -7,13 +7,13 @@ namespace NoteDotNet.Web.Shared
 {
     public partial class Sidebar
     {
-        protected string Query { get; set; }
+        private string Query { get; set; }
 
-        protected int Limit { get; set; }
+        private int Limit { get; set; }
 
-        protected SortProperty Property { get; set; } = SortProperty.Updated;
+        private SortProperty Property { get; set; } = SortProperty.Updated;
 
-        protected SortDirection Direction { get; set; } = SortDirection.Descending;
+        private SortDirection Direction { get; set; } = SortDirection.Descending;
 
         [Parameter]
         public int DefaultLimit { get; set; }
@@ -28,7 +28,7 @@ namespace NoteDotNet.Web.Shared
             base.OnInitialized();
         }
 
-        protected void OnSubmit()
+        private void OnSubmit()
         {
             var args = new QueryChangedEventArgs
             {

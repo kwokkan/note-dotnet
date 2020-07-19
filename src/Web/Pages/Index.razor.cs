@@ -16,15 +16,15 @@ namespace NoteDotNet.Web.Pages
         private NavigationManager NavigationManager { get; set; }
 
         [Inject]
-        public IJsHelper JsHelper { get; set; }
+        private IJsHelper JsHelper { get; set; }
 
         [Inject]
         private INoteService NoteService { get; set; }
 
         [CascadingParameter(Name = nameof(AppState))]
-        protected AppState AppState { get; set; }
+        private AppState AppState { get; set; }
 
-        protected CollectionModel<NoteModel> Notes { get; private set; }
+        private CollectionModel<NoteModel> Notes { get; set; }
 
         private int _offset = 0;
 

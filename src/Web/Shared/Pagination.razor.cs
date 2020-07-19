@@ -19,9 +19,9 @@ namespace NoteDotNet.Web.Shared
         [Parameter]
         public EventCallback<int> OnPageChanged { get; set; }
 
-        protected int CurrentPage { get; set; }
+        private int CurrentPage { get; set; }
 
-        protected int TotalPages { get; set; }
+        private int TotalPages { get; set; }
 
         protected override void OnInitialized()
         {
@@ -37,7 +37,7 @@ namespace NoteDotNet.Web.Shared
             UpdateState();
         }
 
-        protected Task ChangePage(int page)
+        private Task ChangePage(int page)
         {
             CurrentPage = page;
 

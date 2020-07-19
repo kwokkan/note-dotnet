@@ -16,7 +16,7 @@ namespace NoteDotNet.Web.Shared
         [Parameter]
         public EventCallback<NoteModel> OnDeletedClicked { get; set; }
 
-        protected async Task DeleteClickedAsync()
+        private async Task DeleteClickedAsync()
         {
             await OnDeletedClicked.InvokeAsync(Note);
         }
