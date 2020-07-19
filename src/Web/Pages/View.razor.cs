@@ -4,10 +4,11 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
 using NoteDotNet.Abstractions;
+using NoteDotNet.Web.Shared;
 
 namespace NoteDotNet.Web.Pages
 {
-    public class ViewComponentBase : ComponentBase
+    public class ViewComponentBase : LoadableComponentBase<NoteModel>
     {
         [Inject]
         private INoteService NoteService { get; set; }
@@ -18,20 +19,18 @@ namespace NoteDotNet.Web.Pages
         [Parameter]
         public int Id { get; set; }
 
-        protected NoteModel Note { get; private set; }
-
         protected string CurrentTagText { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();
 
-            Note = await NoteService.GetAsync(Id);
+            await LoadAsync(async () => await NoteService.GetAsync(Id));
         }
 
         protected async Task OnSaveNoteClickedAsync()
         {
-            await NoteService.UpdateAsync(Id, Note);
+            await NoteService.UpdateAsync(Id, Model);
 
             NavigationManager.NavigateTo("/");
         }
@@ -46,12 +45,12 @@ namespace NoteDotNet.Web.Pages
 
         protected void OnTagDeleteClicked(string tag)
         {
-            Note.Tags.Remove(tag);
+            Model.Tags.Remove(tag);
         }
 
         protected void AddTag()
         {
-            Note.Tags.Add(CurrentTagText);
+            Model.Tags.Add(CurrentTagText);
 
             CurrentTagText = null;
         }

@@ -2,89 +2,108 @@
 @inherits ViewComponentBase
 @using NoteDotNet.Web.Helpers
 
-@if (Note == null)
+@switch (State)
 {
-    <p>No note selected</p>
-}
-else
-{
-    <div class="row pt-3 mb-3">
-        <a href="/" class="btn btn-link">
-            Cancel
-        </a>
+    case Models.LoadingState.NotLoaded:
+        <h2>No note selected</h2>
+        break;
+    case Models.LoadingState.Loading:
+        <h2>Loading note</h2>
+        break;
+    case Models.LoadingState.Loaded:
+        <div class="row pt-3 mb-3">
+            <a href="/" class="btn btn-link">
+                Cancel
+            </a>
 
-        <div class="btn-group">
-            <button type="button" class="btn btn-success" @onclick="OnSaveNoteClickedAsync">Save</button>
+            <div class="btn-group">
+                <button type="button" class="btn btn-success" @onclick="OnSaveNoteClickedAsync">Save</button>
+            </div>
+
+            <span class="page-text">
+                Last updated: @Model.Updated
+            </span>
         </div>
 
-        <span class="page-text">
-            Last updated: @Note.Updated
-        </span>
-    </div>
+        <div class="row-fluid pt-3">
+            <EditForm Model="Model">
+                <div class="card-group">
+                    <div class="card">
+                        <h5 class="card-header">
+                            Edit
+                        </h5>
 
-    <div class="row-fluid pt-3">
-        <EditForm Model="Note">
-            <div class="card-group">
-                <div class="card">
-                    <h5 class="card-header">
-                        Edit
-                    </h5>
-
-                    <div class="card-body">
-                        <InputTextArea class="form-control edit-note-content" @bind-Value="@Note.Content">
-                        </InputTextArea>
+                        <div class="card-body">
+                            <InputTextArea class="form-control edit-note-content" @bind-Value="@Model.Content">
+                            </InputTextArea>
+                        </div>
                     </div>
-                </div>
 
-                <div class="card">
-                    <h5 class="card-header">
-                        Preview
-                    </h5>
+                    <div class="card">
+                        <h5 class="card-header">
+                            Preview
+                        </h5>
 
-                    <div class="card-body">
-                        <p class="card-text">
-                            @MarkdownHelper.ToHtml(Note.Content)
-                        </p>
+                        <div class="card-body">
+                            <p class="card-text">
+                                @MarkdownHelper.ToHtml(Model.Content)
+                            </p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="card">
-                    <h5 class="card-header">
-                        Tags
-                    </h5>
+                    <div class="card">
+                        <h5 class="card-header">
+                            Tags
+                        </h5>
 
-                    <div class="card-body">
-                        <p class="card-text">
-                            <div class="input-group mb-3">
-                                <InputText class="form-control" placeholder="Enter new tag..." @bind-Value="@CurrentTagText" @onkeyup="OnCurrentTagTextKeyUp" />
+                        <div class="card-body">
+                            <p class="card-text">
+                                <div class="input-group mb-3">
+                                    <InputText class="form-control" placeholder="Enter new tag..." @bind-Value="@CurrentTagText" @onkeyup="OnCurrentTagTextKeyUp" />
 
-                                <div class="input-group-append">
+                                    <div class="input-group-append">
 
-                                    <button type="button" class="btn btn-success" title="Add tag" @onclick="AddTag">
-                                        +
-                                    </button>
+                                        <button type="button" class="btn btn-success" title="Add tag" @onclick="AddTag">
+                                            +
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        </p>
+                            </p>
 
-                        <hr />
+                            <hr />
 
-                        <p class="card-text lead">
-                            @if (!Note.Tags.IsNullOrEmpty())
-                            {
-                                @foreach (var tag in Note.Tags)
+                            <p class="card-text lead">
+                                @if (!Model.Tags.IsNullOrEmpty())
                                 {
-                                    <span class="badge badge-pill badge-primary">
-                                        @tag
+                                    @foreach (var tag in Model.Tags)
+                                    {
+                                        <span class="badge badge-pill badge-primary">
+                                            @tag
 
-                                        <span class="badge badge-pill badge-danger ml-2" title="Delete tag" @onclick="() => OnTagDeleteClicked(tag)">&times;</span>
-                                    </span>
+                                            <span class="badge badge-pill badge-danger ml-2" title="Delete tag" @onclick="() => OnTagDeleteClicked(tag)">&times;</span>
+                                        </span>
+                                    }
                                 }
-                            }
-                        </p>
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </EditForm>
-    </div>
+            </EditForm>
+        </div>
+        break;
+    case Models.LoadingState.Errored:
+        <div class="row pt-3 mb-3">
+            <a href="/" class="btn btn-link">
+                Back
+            </a>
+        </div>
+
+        <h2>@Exception.Message</h2>
+
+        <pre>
+        <code>@Exception</code>
+        </pre>
+        break;
+    default:
+        break;
 }
