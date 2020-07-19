@@ -4,11 +4,10 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
 using NoteDotNet.Abstractions;
-using NoteDotNet.Web.Shared;
 
 namespace NoteDotNet.Web.Pages
 {
-    public class ViewComponentBase : LoadableComponentBase<NoteModel>
+    public partial class View
     {
         [Inject]
         private INoteService NoteService { get; set; }
@@ -16,26 +15,21 @@ namespace NoteDotNet.Web.Pages
         [Inject]
         private NavigationManager NavigationManager { get; set; }
 
+        private NoteModel Model;
+
+        private string CurrentTagText { get; set; }
+
         [Parameter]
         public int Id { get; set; }
 
-        protected string CurrentTagText { get; set; }
-
-        protected override async Task OnInitializedAsync()
-        {
-            await base.OnInitializedAsync();
-
-            await LoadAsync(async () => await NoteService.GetAsync(Id));
-        }
-
-        protected async Task OnSaveNoteClickedAsync()
+        private async Task OnSaveNoteClickedAsync()
         {
             await NoteService.UpdateAsync(Id, Model);
 
             NavigationManager.NavigateTo("/");
         }
 
-        protected void OnCurrentTagTextKeyUp(KeyboardEventArgs eventArgs)
+        private void OnCurrentTagTextKeyUp(KeyboardEventArgs eventArgs)
         {
             if (eventArgs.Key == "Enter")
             {
@@ -43,16 +37,23 @@ namespace NoteDotNet.Web.Pages
             }
         }
 
-        protected void OnTagDeleteClicked(string tag)
+        private void OnTagDeleteClicked(string tag)
         {
             Model.Tags.Remove(tag);
         }
 
-        protected void AddTag()
+        private void AddTag()
         {
             Model.Tags.Add(CurrentTagText);
 
             CurrentTagText = null;
+        }
+
+        private async Task<NoteModel> LoadNoteAsync()
+        {
+            Model = await NoteService.GetAsync(Id);
+
+            return Model;
         }
     }
 }

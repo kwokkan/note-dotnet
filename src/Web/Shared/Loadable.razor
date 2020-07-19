@@ -1,5 +1,4 @@
 ﻿@typeparam TModel
-@inherits LoadableComponentBase<TModel>
 
 @switch (State)
 {
@@ -10,10 +9,10 @@
         @Loading
         break;
     case Models.LoadingState.Loaded:
-        @Loaded
+        @Loaded(Model)
         break;
     case Models.LoadingState.Errored:
-        @Errored
+        @Errored(Exception)
         break;
     default:
         break;

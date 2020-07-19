@@ -2,13 +2,12 @@
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Rendering;
 
 using NoteDotNet.Web.Models;
 
 namespace NoteDotNet.Web.Shared
 {
-    public class LoadableComponentBase<TModel> : ComponentBase
+    public partial class Loadable<TModel>
     {
         [Parameter]
         public RenderFragment NotLoaded { get; set; }
@@ -20,11 +19,21 @@ namespace NoteDotNet.Web.Shared
         public RenderFragment<TModel> Loaded { get; set; }
 
         [Parameter]
-        public RenderFragment Errored { get; set; }
+        public RenderFragment<Exception> Errored { get; set; }
+
+        [Parameter]
+        public Func<Task<TModel>> LoadFunc { get; set; }
 
         protected LoadingState State { get; set; }
         protected Exception Exception { get; set; }
         protected TModel Model { get; set; }
+
+        protected override async Task OnInitializedAsync()
+        {
+            await LoadAsync(LoadFunc);
+
+            await base.OnInitializedAsync();
+        }
 
         protected async Task LoadAsync(Func<Task<TModel>> action)
         {
@@ -32,7 +41,10 @@ namespace NoteDotNet.Web.Shared
 
             try
             {
-                Model = await action();
+                if (action != null)
+                {
+                    Model = await action();
+                }
 
                 State = LoadingState.Loaded;
             }
@@ -42,31 +54,6 @@ namespace NoteDotNet.Web.Shared
 
                 State = LoadingState.Errored;
             }
-
-            StateHasChanged();
-        }
-
-        protected override void BuildRenderTree(RenderTreeBuilder builder)
-        {
-            base.BuildRenderTree(builder);
-            switch (State)
-            {
-                case LoadingState.NotLoaded:
-                    builder.AddContent((int)State, NotLoaded);
-                    break;
-                case LoadingState.Loading:
-                    builder.AddContent((int)State, Loading);
-                    break;
-                case LoadingState.Loaded:
-                    builder.AddContent((int)State, Loaded);
-                    break;
-                case LoadingState.Errored:
-                    builder.AddContent((int)State, Errored);
-                    break;
-                default:
-                    break;
-            }
-
         }
     }
 }

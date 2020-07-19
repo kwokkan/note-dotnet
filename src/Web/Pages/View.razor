@@ -1,16 +1,16 @@
 ﻿@page "/{Id:int}"
-@inherits ViewComponentBase
 @using NoteDotNet.Web.Helpers
 
-@switch (State)
-{
-    case Models.LoadingState.NotLoaded:
+<Loadable TModel="NoteModel" LoadFunc="LoadNoteAsync">
+    <NotLoaded>
         <h2>No note selected</h2>
-        break;
-    case Models.LoadingState.Loading:
+    </NotLoaded>
+
+    <Loading>
         <h2>Loading note</h2>
-        break;
-    case Models.LoadingState.Loaded:
+    </Loading>
+
+    <Loaded Context="Model">
         <div class="row pt-3 mb-3">
             <a href="/" class="btn btn-link">
                 Cancel
@@ -90,20 +90,19 @@
                 </div>
             </EditForm>
         </div>
-        break;
-    case Models.LoadingState.Errored:
+    </Loaded>
+
+    <Errored Context="ex">
         <div class="row pt-3 mb-3">
             <a href="/" class="btn btn-link">
                 Back
             </a>
         </div>
 
-        <h2>@Exception.Message</h2>
+        <h2>@ex.Message</h2>
 
         <pre>
-        <code>@Exception</code>
-        </pre>
-        break;
-    default:
-        break;
-}
+        <code>@ex</code>
+    </pre>
+    </Errored>
+</Loadable>
