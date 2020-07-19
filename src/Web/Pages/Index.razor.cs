@@ -8,9 +8,9 @@ using NoteDotNet.Web.Helpers;
 using NoteDotNet.Web.Models;
 using NoteDotNet.Web.Shared;
 
-namespace NoteDotNet.Web
+namespace NoteDotNet.Web.Pages
 {
-    public class IndexComponentBase : ComponentBase
+    public partial class Index
     {
         [Inject]
         private NavigationManager NavigationManager { get; set; }
@@ -73,7 +73,7 @@ namespace NoteDotNet.Web
         {
             AppState.SetCurrentNote(note);
 
-            await JsHelper.ShowModal(DeleteNoteModalComponentBase.Id);
+            await JsHelper.ShowModal(DeleteNoteModal.Id);
         }
 
         private async Task SearchAsync()

@@ -5,7 +5,7 @@ using NoteDotNet.Web.Models;
 
 namespace NoteDotNet.Web.Shared
 {
-    public class SidebarComponentBase : ComponentBase
+    public partial class Sidebar
     {
         protected string Query { get; set; }
 

@@ -2,7 +2,7 @@
 
 namespace NoteDotNet.Web.Shared
 {
-    public class ModalComponentBase : ComponentBase
+    public partial class Modal
     {
         [Parameter]
         public string Id { get; set; }

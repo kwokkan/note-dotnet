@@ -6,7 +6,7 @@ using NoteDotNet.Abstractions;
 
 namespace NoteDotNet.Web.Shared
 {
-    public class DeleteNoteModalComponentBase : ComponentBase
+    public partial class DeleteNoteModal
     {
         public const string Id = "delete-note-modal";
 

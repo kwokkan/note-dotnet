@@ -32,14 +32,14 @@ namespace NoteDotNet.Web.Shared
         {
             await NoteService.CreateAsync(note);
 
-            await JsHelper.CloseModal(NewNoteModalComponentBase.Id);
+            await JsHelper.CloseModal(NewNoteModal.Id);
         }
 
         protected async Task OnDeleteNoteModalDeleteClickedAsync(NoteModel note)
         {
             await NoteService.DeleteAsync(note.Id);
 
-            await JsHelper.CloseModal(DeleteNoteModalComponentBase.Id);
+            await JsHelper.CloseModal(DeleteNoteModal.Id);
 
             AppState.SetCurrentNote(null);
 

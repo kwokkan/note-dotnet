@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Components;
 
 using NoteDotNet.Abstractions;
 
-namespace NoteDotNet.Web
+namespace NoteDotNet.Web.Shared
 {
-    public class NewNoteModalComponentBase : ComponentBase
+    public partial class NewNoteModal
     {
         public const string Id = "new-note-modal";
 

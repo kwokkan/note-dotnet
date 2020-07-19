@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace NoteDotNet.Web.Shared
 {
-    public class PaginationComponentBase : ComponentBase
+    public partial class Pagination
     {
         [Parameter]
         public int Offset { get; set; }
