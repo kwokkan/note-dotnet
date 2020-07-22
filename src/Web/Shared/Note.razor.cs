@@ -4,10 +4,10 @@ using NoteDotNet.Abstractions;
 
 namespace NoteDotNet.Web.Shared
 {
-    public class NoteComponentBase : ComponentBase
+    public partial class Note
     {
         [Parameter]
-        public NoteModel Note { get; set; }
+        public NoteModel Model { get; set; }
 
         [Parameter]
         public EventCallback<NoteModel> OnEditClicked { get; set; }
@@ -15,14 +15,14 @@ namespace NoteDotNet.Web.Shared
         [Parameter]
         public EventCallback<NoteModel> OnDeleteClicked { get; set; }
 
-        protected void EditClicked()
+        private void EditClicked()
         {
-            OnEditClicked.InvokeAsync(Note);
+            OnEditClicked.InvokeAsync(Model);
         }
 
-        protected void DeleteClicked()
+        private void DeleteClicked()
         {
-            OnDeleteClicked.InvokeAsync(Note);
+            OnDeleteClicked.InvokeAsync(Model);
         }
     }
 }

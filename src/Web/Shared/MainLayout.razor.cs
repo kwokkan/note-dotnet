@@ -9,7 +9,7 @@ using NoteDotNet.Web.Models;
 
 namespace NoteDotNet.Web.Shared
 {
-    public class MainLayoutLayoutComponentBase : LayoutComponentBase
+    public partial class MainLayout
     {
         [Inject]
         private IJsHelper JsHelper { get; set; }
@@ -17,9 +17,9 @@ namespace NoteDotNet.Web.Shared
         [Inject]
         private INoteService NoteService { get; set; }
 
-        protected AppState AppState { get; set; } = new AppState();
+        private AppState AppState { get; set; } = new AppState();
 
-        protected void OnSidebarQueryChanged(QueryChangedEventArgs eventArgs)
+        private void OnSidebarQueryChanged(QueryChangedEventArgs eventArgs)
         {
             AppState.Query = eventArgs.Query;
             AppState.Limit = eventArgs.Limit;
@@ -28,14 +28,14 @@ namespace NoteDotNet.Web.Shared
             AppState.LastActivity = DateTime.UtcNow;
         }
 
-        protected async Task OnNewNoteModalNoteCreatedAsync(NoteModel note)
+        private async Task OnNewNoteModalNoteCreatedAsync(NoteModel note)
         {
             await NoteService.CreateAsync(note);
 
             await JsHelper.CloseModal(NewNoteModal.Id);
         }
 
-        protected async Task OnDeleteNoteModalDeleteClickedAsync(NoteModel note)
+        private async Task OnDeleteNoteModalDeleteClickedAsync(NoteModel note)
         {
             await NoteService.DeleteAsync(note.Id);
 

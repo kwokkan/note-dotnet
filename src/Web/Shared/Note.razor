@@ -1,25 +1,24 @@
-﻿@inherits NoteComponentBase
-@using NoteDotNet.Web.Helpers
+﻿@using NoteDotNet.Web.Helpers
 
 <div class="card">
     <div class="card-header">
         <a href="#" title="Edit" @onclick="EditClicked">✏️</a>
         <a href="#" title="Delete" @onclick="DeleteClicked">🗑️</a>
-        <span title="Updated @Note.Updated">🕓</span>
+        <span title="Updated @Model.Updated">🕓</span>
 
-        <span class="text-muted float-right">#@Note.Id</span>
+        <span class="text-muted float-right">#@Model.Id</span>
     </div>
 
     <div class="card-body">
         <p class="card-text">
-            @MarkdownHelper.ToHtml(Note.Content)
+            @MarkdownHelper.ToHtml(Model.Content)
         </p>
     </div>
 
-    @if (!Note.Tags.IsNullOrEmpty())
+    @if (!Model.Tags.IsNullOrEmpty())
     {
         <div class="card-footer">
-            @foreach (var tag in Note.Tags)
+            @foreach (var tag in Model.Tags)
             {
                 <span class="badge badge-pill badge-primary">@tag</span>
             }
