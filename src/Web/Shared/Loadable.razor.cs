@@ -24,9 +24,11 @@ namespace NoteDotNet.Web.Shared
         [Parameter]
         public Func<Task<TModel>> LoadFunc { get; set; }
 
-        protected LoadingState State { get; set; }
-        protected Exception Exception { get; set; }
-        protected TModel Model { get; set; }
+        private LoadingState State { get; set; }
+
+        private TModel Model { get; set; }
+
+        private Exception Exception { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -35,7 +37,7 @@ namespace NoteDotNet.Web.Shared
             await base.OnInitializedAsync();
         }
 
-        protected async Task LoadAsync(Func<Task<TModel>> action)
+        private async Task LoadAsync(Func<Task<TModel>> action)
         {
             State = LoadingState.Loading;
 

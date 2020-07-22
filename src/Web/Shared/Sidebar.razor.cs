@@ -7,6 +7,12 @@ namespace NoteDotNet.Web.Shared
 {
     public partial class Sidebar
     {
+        [Parameter]
+        public int DefaultLimit { get; set; }
+
+        [Parameter]
+        public EventCallback<QueryChangedEventArgs> OnQueryChanged { get; set; }
+
         private string Query { get; set; }
 
         private int Limit { get; set; }
@@ -14,12 +20,6 @@ namespace NoteDotNet.Web.Shared
         private SortProperty Property { get; set; } = SortProperty.Updated;
 
         private SortDirection Direction { get; set; } = SortDirection.Descending;
-
-        [Parameter]
-        public int DefaultLimit { get; set; }
-
-        [Parameter]
-        public EventCallback<QueryChangedEventArgs> OnQueryChanged { get; set; }
 
         protected override void OnInitialized()
         {
